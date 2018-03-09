@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+{% block title %} Forum | Posts {% endblock %}
+{% block content %}
+	<div class="row" style="margin-top: 100px;">
+		{% for post in posts %}
+			<div class="col-md-4">
+				<div class="card border-primary" style="margin: 10px 0;">
+				 <div class="card-body">
+				    <h2 class="card-title">{{ post.title }}</h2>
+				    <p class="card-text" style="font-size: 13px;">{{ post.content }}</p>
+				    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 10px;">Created at:{{ post.date.strftime('%Y-%m-%d %H:%M:%S') }}</h6>
+				  </div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/confirm.js') }}"></script>
+{% endblock %}
