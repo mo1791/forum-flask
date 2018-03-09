@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+{% block title %} Forums | Stores {% endblock %}
+{% block content %}
+	{% with flashs = get_flashed_messages() %}
+		{% if flashs %}
+			{% for flash in flashs %}
+				<p class="text-success text-center">{{ flash }}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<div class="store">
+		<div class="create">
+			<button class="btn btn-primary btn sm"><a href="{{ url_for('add_topic') }}"><i class="fa fa-plus"></i></a></button>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<th>Title</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				{% for post in posts %}
+					<tr>
+						<td>{{ post.title }}</td>
+						<td><button class="btn btn-warning btn-sm"><a href="#"><i class="fa fa-edit"></i></a></button></td>
+						<td><button class="btn btn-danger btn-sm"><a href="#"><i class="fa fa-trash-o"></i></a></button></td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}
