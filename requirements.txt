@@ -1,3 +1,4 @@
 Flask==0.12.2
 Flask-Gunicorn==0.1.1
 Flask-WTF==0.14
+Flask-RESTful==0.3.6
