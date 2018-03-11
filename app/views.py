@@ -60,3 +60,7 @@ def all_posts():
 @app.errorhandler(404)
 def not_found(err):
 	return render_template("errors/404.html"), 404
+
+@app.errorhandler(405)
+def not_allowed(err):
+	return "The request method is not allowed!!", 405
