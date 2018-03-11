@@ -8,4 +8,4 @@ posts_store = stores.PostStores()
 
 dummy_data.store(members_store, posts_store)
 
-from app import views
+from app import views, api
