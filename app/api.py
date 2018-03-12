@@ -11,13 +11,13 @@ parser.add_argument(
 	"title",
 	type=str,
 	required=True,
-	help="title cannot be blank!!"
+	nullable=False
 )
 parser.add_argument(
 	"content",
 	type=str,
 	required=True,
-	help="content cannot be blank!!"
+	nullable=False
 )
 
 @api.resource("/api/topic")
@@ -35,17 +35,22 @@ class TopicListApi(Resource):
 class TopicApi(Resource):
 	def get(self, id_):
 		post = posts_store.get_by_id(id_)
-		if post is None:
-			abort(404, message="topic %d doesn't exist" % id_)
-		return post.__dict__()
+		try:
+			result = post.__dict__()
+		except AttributeError:
+			result = abort(404, message="topic %d doesn't exist" % id_)
+		return result
 	def put(self, id_):
 		post = posts_store.get_by_id(id_)
-		if post is None:
-			abort(404, message="topic %d doesn't exist" % id_)
 		args = parser.parse_args(strict=True)
 		post.title = args["title"]
 		post.content = args["content"]
-		return post.__dict__()
+		posts_store.update(post)
+		try:
+			result = post.__dict__()
+		except AttributeError:
+			result = abort(404, message="topic %d doesn't exist" % id_)
+		return result
 	def delete(self, id_):
 		if not posts_store.entity_exist(id_):
 			abort(404, message="topic %d doesn't exist" % id_)
