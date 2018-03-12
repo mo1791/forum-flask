@@ -43,10 +43,10 @@ class TopicApi(Resource):
 	def put(self, id_):
 		post = posts_store.get_by_id(id_)
 		args = parser.parse_args(strict=True)
-		post.title = args["title"]
-		post.content = args["content"]
-		posts_store.update(post)
 		try:
+			post.title = args["title"]
+			post.content = args["content"]
+			posts_store.update(post)
 			result = post.__dict__()
 		except AttributeError:
 			result = abort(404, message="topic %d doesn't exist" % id_)
