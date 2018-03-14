@@ -17,8 +17,7 @@
 				"url": {
 					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
 					"protocol": "http",
-					"host": ["https://glacial-ravine-46753.herokuapp.com"],
-					"port": "80",
+					"host": ["glacial-ravine-46753.herokuapp.com"],
 					"path": [
 						"api",
 						"topic"
@@ -36,8 +35,7 @@
 				"url": {
 					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
 					"protocol": "http",
-					"host": ["https://glacial-ravine-46753.herokuapp.com"],
-					"port": "80",
+					"host": ["glacial-ravine-46753.herokuapp.com"],
 					"path": [
 						"api",
 						"topic",
@@ -64,8 +62,7 @@
 				"url": {
 					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
 					"protocol": "http",
-					"host": ["https://glacial-ravine-46753.herokuapp.com"],
-					"port": "80",
+					"host": ["glacial-ravine-46753.herokuapp.com"],
 					"path": [
 						"api",
 						"topic"
@@ -91,8 +88,7 @@
 				"url": {
 					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
 					"protocol": "http",
-					"host": ["https://glacial-ravine-46753.herokuapp.com"],
-					"port": "80",
+					"host": ["glacial-ravine-46753.herokuapp.com"],
 					"path": [
 						"api",
 						"topic",
@@ -111,8 +107,7 @@
 				"url": {
 					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
 					"protocol": "http",
-					"host": ["https://glacial-ravine-46753.herokuapp.com/"],
-					"port": "80",
+					"host": ["glacial-ravine-46753.herokuapp.com/"],
 					"path": [
 						"api",
 						"topic",
