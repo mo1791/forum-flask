@@ -1,0 +1,126 @@
+{
+	"info": {
+		"name": "flask-api",
+		"_postman_id": "470e442f-76a2-2abc-0281-bfbe077c6086",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "show all topics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
+					"protocol": "http",
+					"host": ["https://glacial-ravine-46753.herokuapp.com"],
+					"port": "80",
+					"path": [
+						"api",
+						"topic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topic show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"protocol": "http",
+					"host": ["https://glacial-ravine-46753.herokuapp.com"],
+					"port": "80",
+					"path": [
+						"api",
+						"topic",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topic add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"hello\",\n\t\"content\": \"This is the topic content !\"\n}"
+				},
+				"url": {
+					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
+					"protocol": "http",
+					"host": ["https://glacial-ravine-46753.herokuapp.com"],
+					"port": "80",
+					"path": [
+						"api",
+						"topic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topic update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"hello\",\n\t\"content\": \"This is the topic content !\"\n}"
+				},
+				"url": {
+					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"protocol": "http",
+					"host": ["https://glacial-ravine-46753.herokuapp.com"],
+					"port": "80",
+					"path": [
+						"api",
+						"topic",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topic delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"protocol": "http",
+					"host": ["https://glacial-ravine-46753.herokuapp.com/"],
+					"port": "80",
+					"path": [
+						"api",
+						"topic",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
