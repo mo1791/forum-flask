@@ -30,5 +30,7 @@
 	</form>
 {% endblock %}
 {% block javascript %}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/post.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}
