@@ -1,7 +1,7 @@
 "use strict";
 let Request;
 (function(Request){
-    const http = () => {
+    Request.http = () => {
         if (window.XMLHttpRequest) {
             return new XMLHttpRequest();
         }
@@ -21,9 +21,9 @@ let Request;
             }
         }
     }
-    const promise = (method,url,options={}) => {
+    Request.promise = (method,url,options={}) => {
         return new Promise((resolve,reject) => {
-            const req = http();
+            const req = Request.http();
             const data = options.data || null;
             req.open(method,url);
             req.responseType = options.type || "json";
@@ -42,9 +42,9 @@ let Request;
             req.send(data);
         });
     }
-    const post = (url,options) => promise("POST",url, options);
-    const del  = (url, options) => promise("DELETE", url, options);
-    const get  = (url,options) => promise("GET", url,options);
-    const put  = (url, options) => promise("PUT", url,options);
+    Request.post = (url,options) => Request.promise("POST",url, options);
+    Request.delete  = (url, options) => Request.promise("DELETE", url, options);
+    Request.get  = (url,options) => Request.promise("GET", url,options);
+    Request.put  = (url, options) => Request.promise("PUT", url,options);
 
 })(Request || (Request = {}));

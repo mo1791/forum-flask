@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			]
 		})
 		.then(response => {
-			window.alert(response.message)
-			console.info(response.posted)
+			console.info(response)
 		})
 		.catch(error => {
 			console.error(error.message)

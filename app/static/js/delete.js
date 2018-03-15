@@ -7,7 +7,7 @@ function handle(e) {
 	Promise.resolve(window.confirm("sure you want to delete it ?!!"))
 	.then(confirm => {
 		let id = this.firstElementChild.dataset.topicId
-		return (confirm && Request.del(`/api/topic/${id}`,{
+		return (confirm && Request.delete(`/api/topic/${id}`,{
 			headers: [
 				["X-Requested-With", "XMLHttpRequest"],
 				["Content-Type", "application/json; charset=utf-8"]
