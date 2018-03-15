@@ -27,7 +27,7 @@ let Request;
             const data = options.data || null;
             req.open(method,url);
             req.responseType = options.type || "json";
-            req.onreadystatechange = () => {
+            req.onload = () => {
                 if (req.readyState == XMLHttpRequest.DONE) {
                     if (req.status == 200) {
                         resolve(req.response);
@@ -36,15 +36,15 @@ let Request;
                     }
                 }
             };
+            /*
             for(let [header,value] of options.headers) {
                 req.setRequestHeader(header,value);
             }
+            */
+            options.headers.forEach(([header,value]) => req.setRequestHeader(header,value))
             req.send(data);
         });
     }
     Request.post = (url,options) => Request.promise("POST",url, options);
     Request.delete  = (url, options) => Request.promise("DELETE", url, options);
-    Request.get  = (url,options) => Request.promise("GET", url,options);
-    Request.put  = (url, options) => Request.promise("PUT", url,options);
-
 })(Request || (Request = {}));

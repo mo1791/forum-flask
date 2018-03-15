@@ -6,7 +6,7 @@ function handle(e) {
 	e.preventDefault();
 	Promise.resolve(window.confirm("sure you want to delete it ?!!"))
 	.then(confirm => {
-		let id = this.firstElementChild.dataset.topicId
+		let id = this.dataset.topicId
 		return (confirm && Request.delete(`/api/topic/${id}`,{
 			headers: [
 				["X-Requested-With", "XMLHttpRequest"],
@@ -16,15 +16,11 @@ function handle(e) {
 	})
 	.then(response => {
 		window.alert(response.message)
-		return Request.get(window.location.pathname, {
-			type: "document",
-			headers: [
-				["X-Requested-With", "XMLHttpRequest"]
-			]
-		});
+		window.location = window.location.href
 	})
-	.then(page => document.body = page.body )
-	.catch(error => console.error(`error: ${error}`))
+	.catch(error => {
+		console.error(`error: ${error}`)
+	})
 }
 
 btns.forEach(btn => btn.addEventListener("click", handle.bind(btn)))
