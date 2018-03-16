@@ -9,16 +9,18 @@ app.secret_key = "private_key"
 def home():
 	return render_template("index.html", posts=posts_store.get_all())
 
-@app.route("/topic/add", methods=["GET", "POST"])
+@app.route("/topic/add")
 def add_topic():
 	form = forms.TopicForm()
+	"""
 	if request.method == "POST" and form.validate_on_submit():
 		new_post = models.Posts(request.form["title"], request.form["content"])
 		posts_store.add(new_post)
 		flash("new topic was created successfully!!")
 		return redirect(url_for("home"))
 	else:
-		return render_template("add_topic.html", form=form)
+	"""	
+	return render_template("add_topic.html", form=form)
 
 @app.route("/topic/show/<int:id_>")
 def show_topic(id_):
@@ -43,6 +45,7 @@ def edit_topic(id_):
 		form.content.data = post.content
 		return render_template("edit_topic.html", form=form, post=post)
 
+"""
 @app.route("/topic/delete/<int:id_>")
 def delete_topic(id_):
 	if posts_store.entity_exist(id_):
@@ -51,7 +54,7 @@ def delete_topic(id_):
 		return redirect(url_for("home"))
 	else:
 		abort(404)
-
+"""
 @app.route("/posts")
 def all_posts():
 	posts = posts_store.get_all()

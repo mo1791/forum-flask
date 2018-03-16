@@ -45,20 +45,16 @@ div.create {
 	margin: 10px 0;
 }
 
-div.create button {
+div.create a {
 	background-color: #0b71c1;
     padding: 5px 8px;
-    border-radius: 50%;
     font-size: 15px;
     font-weight: 100;
+    color: #fff;
 }
 
-div.create button:hover {
+div.create a:hover {
 	box-shadow: 0px 0px 0px 1px #0b71c1 inset,0px 0px 0px 3px #fff inset;
-}
-
-div.create button a {
-	color: #fff;
 }
 
 table {
@@ -87,21 +83,17 @@ th:nth-child(1) {
 }
 
 
-td:nth-child(2) button {
+td:nth-child(2) a {
 	background-color: #ec8d01;
 	padding: 8px;
-	border-radius: 50%;
 	font-size: 15px;
+	color: #fff;
 }
 
-td:nth-child(2) button:hover {
+td:nth-child(2) a:hover {
 	box-shadow: 0px 0px 0px 1px #ec8d01 inset,0px 0px 0px 3px #fff inset;
 }
 
-td:nth-child(2) button a {
-
-	color: #fff;
-}
 td:nth-child(3) {
 	text-align: center;
 }
@@ -111,7 +103,6 @@ td:nth-child(3) button {
 	background-color: #d81920;
 	padding: 7px 9px;
 	font-size: 15px;
-	border-radius: 50%;
 }
 
 td:nth-child(3) button:hover {
@@ -122,19 +113,16 @@ td:nth-child(3) button a {
 	color: #fff;
 }
 
-td:nth-child(4) button {
+td:nth-child(4) a {
 	padding: 6px 8px 9px;
 	font-size: 15px;
-	border-radius: 50%;
+	color: #fff;
 }
 
-td:nth-child(4) button:hover {
+td:nth-child(4) a:hover {
 	box-shadow: 0px 0px 0px 1px #2196F3 inset,0px 0px 0px 3px #fff inset;
 }
 
-td:nth-child(4) button a {
-	color: #fff;
-}
 
 footer#footer {
 	background-color: #0b71c1;
