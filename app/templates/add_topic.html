@@ -1,7 +1,7 @@
 {% extends "layout/base.html" %}
 {% block title %}Forums | Add{% endblock %}
 {% block content %}
-	<form method="post" action="{{ url_for('add_topic') }}" role="form" id="form">
+	<form method="post" role="form" id="form">
 		<div class="form-group">
 			{{ form.csrf_token }}
 		</div>
@@ -30,5 +30,7 @@
 	</form>
 {% endblock %}
 {% block javascript %}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/ajax.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/post.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}

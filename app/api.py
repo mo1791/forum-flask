@@ -19,6 +19,12 @@ parser.add_argument(
 	required=True,
 	nullable=False
 )
+parser.add_argument(
+	"csrf_token",
+	type=str,
+	required=True,
+	nullable=False
+)
 
 @api.resource("/api/topic")
 class TopicListApi(Resource):
@@ -29,7 +35,10 @@ class TopicListApi(Resource):
 		args = parser.parse_args(strict=True)
 		post = models.Posts(args["title"], args["content"])
 		posts_store.add(post)
-		return post.__dict__()
+		return {
+			"message": "new topic was created successfully?!!",
+			"posted": post.__dict__()
+		}
 
 @api.resource("/api/topic/<int:id_>")
 class TopicApi(Resource):
@@ -47,7 +56,10 @@ class TopicApi(Resource):
 			post.title = args["title"]
 			post.content = args["content"]
 			posts_store.update(post)
-			result = post.__dict__()
+			result = {
+				"message":"topic updated successfully?!!",
+				"updated": post.__dict__()
+			}
 		except AttributeError:
 			result = abort(404, message="topic %d doesn't exist" % id_)
 		return result
@@ -55,4 +67,4 @@ class TopicApi(Resource):
 		if not posts_store.entity_exist(id_):
 			abort(404, message="topic %d doesn't exist" % id_)
 		posts_store.delete(id_)
-		return "", 204
+		return {"message": "Sadly!! topic was deleted"} 
