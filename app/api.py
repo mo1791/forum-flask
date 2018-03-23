@@ -4,7 +4,7 @@ from app import models
 
 
 
-api = Api(app)
+api = Api(app, prefix="/api/v1")
 
 parser = reqparse.RequestParser(trim=True, bundle_errors=True)
 parser.add_argument(
@@ -26,8 +26,18 @@ parser.add_argument(
 	nullable=False
 )
 
-@api.resource("/api/topic")
-class TopicListApi(Resource):
+
+class BaseTopic(Resource):
+	def options(self):
+		return {"allow": "GET, PUT, POST"},200, \
+		{
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "POST, PUT, GET",
+			"Access-Control-Allow-Headers": "content-type, X-JWT-Token, X-Requested-With"
+		}
+
+@api.resource("/topic")
+class TopicListApi(BaseTopic):
 	def get(self):
 		posts = [post.__dict__() for post in posts_store.get_all()]
 		return posts
@@ -40,8 +50,8 @@ class TopicListApi(Resource):
 			"posted": post.__dict__()
 		}
 
-@api.resource("/api/topic/<int:id_>")
-class TopicApi(Resource):
+@api.resource("/topic/<int:id_>")
+class TopicApi(BaseTopic):
 	def get(self, id_):
 		post = posts_store.get_by_id(id_)
 		try:
