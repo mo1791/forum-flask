@@ -1,10 +1,31 @@
 from flask_restful import Resource, Api, abort, reqparse
+from flask_jwt import JWT, jwt_required, current_identity
 from app import app, posts_store
 from app import models
 
 
 
 api = Api(app, prefix="/api/v1")
+
+app.config["SECRET_KEY"] = "private-key"
+app.config["JWT_AUTH_USERNAME_KEY"] = "user"
+app.config["JWT_AUTH_PASSWORD_KEY"] = "passw"
+
+
+def auth_handler(): pass
+def id_handler(): pass
+
+jwt = JWT(app, auth_handler, id_handler)
+
+@jwt.authentication_handler
+def auth_handler(user, passw):
+	if user == "elomari" and passw == "mohamed":
+		return models.Members(user,passw)
+
+@jwt.identity_handler
+def id_handler(payload):
+	id_ = payload["identity"]
+	return id_
 
 parser = reqparse.RequestParser(trim=True, bundle_errors=True)
 parser.add_argument(
@@ -19,15 +40,10 @@ parser.add_argument(
 	required=True,
 	nullable=False
 )
-parser.add_argument(
-	"csrf_token",
-	type=str,
-	required=True,
-	nullable=False
-)
 
 
 class BaseTopic(Resource):
+	@jwt_required()
 	def options(self):
 		return {"allow": "GET, PUT, POST"},200, \
 		{
