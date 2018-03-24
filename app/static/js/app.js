@@ -1,55 +1,4 @@
-const Home = {
-	template: "<router-view></router-view>"
-}
-
-const Index = {
-	template: `
-		<div class="index">
-			hello from index page
-		</div>
-	`
-}
-
-const Add = {
-	template: `
-		<div class="add">
-			hello from add page
-		</div>
-	`
-}
-
-const Edit = {
-	template: `
-		<div class="edit">
-			hello from edit page
-		</div>
-	`
-}
-
-const Show = {
-	template: `
-		<div class="show">
-			hello from show page
-		</div>
-	`
-}
-
-const Delete = {
-	template: `
-		<div class="delete">
-			hello from delete page
-		</div>
-	`
-}
-
-
-
-
-
-Vue.use(Router)
-
-const router = new Router({
-	mode: "history",
+const router = new VueRouter({
 	routes: [
 		{
 			name: "home",
@@ -91,12 +40,17 @@ const router = new Router({
 	]
 })
 
-router.beforEach((from, to, next) => {
+router.beforeEach((to, from, next) => {
 	document.title = to.meta.title
 	next()
 })
 
 new Vue({
 	router,
+	methods: {
+		getFromForm()  {
+			return "hello world"
+		}
+	}
 	template: "<router-view></router-view>"
 }).$mount("#app")
