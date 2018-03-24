@@ -20,13 +20,21 @@ jwt = JWT(app, auth_handler, id_handler)
 @jwt.authentication_handler
 def auth_handler(user, passw):
 	if user == "elomari" and passw == "mohamed":
-		return models.Members(user,passw)
+		return models.Members(user,20)
 
 @jwt.identity_handler
 def id_handler(payload):
 	id_ = payload["identity"]
 	return id_
-
+"""
+@jwt.jwt_payload_handler
+def make_payload(identity):
+	iat = datetime.datetime.utcnow()
+	exp = iat + datetime.timedelta(minutes=30)
+	nbf = iat + datetime.timedelta(seconds=0)
+	id_ = identity.public_id[::-1]
+	return {"exp": exp,"iat": iat, "nbf": nbf, "identity": id_}
+"""
 parser = reqparse.RequestParser(trim=True, bundle_errors=True)
 parser.add_argument(
 	"title",
@@ -43,7 +51,6 @@ parser.add_argument(
 
 
 class BaseTopic(Resource):
-	@jwt_required()
 	def options(self):
 		return {"allow": "GET, PUT, POST"},200, \
 		{
@@ -54,9 +61,10 @@ class BaseTopic(Resource):
 
 @api.resource("/topic")
 class TopicListApi(BaseTopic):
+	@jwt_required()
 	def get(self):
 		posts = [post.__dict__() for post in posts_store.get_all()]
-		return posts
+		return posts, {"Access-Control-Allow-Origin": "*"}
 	def post(self):
 		args = parser.parse_args(strict=True)
 		post = models.Posts(args["title"], args["content"])
