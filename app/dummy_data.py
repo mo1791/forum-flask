@@ -1,69 +1,38 @@
 from app import models
+import datetime
 
 
 members = [
-	models.Members("Monkey De Luffy", 20),
-	models.Members("Kirua Zoldyck", 13),
-	models.Members("Nico Robin", 28)
+	models.Member(user="luffy20", name="Monkey De Luffy", age=20),
+	models.Member(user="kirua15", name="Kirua Zoldyck", age=13),
+	models.Member(user="nico30", name="Nico Robin", age=28)
 ]
 
 posts = [
-	models.Posts("First Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Second Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Third Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Fourth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Fifth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Sixth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("Seventh Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("eighth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("nineth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
-	models.Posts("tenth Heading", "Lorem ipsum dolor sit amet, consectetur adipisicing elit\
-		sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\
-		Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi\
-		ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\
-		in voluptate velit esse cillum dolore eu fugiat nulla pariatur.")
+	models.Post(title="First Heading", content="Lorem ipsum dolor ", member_id=1),
+	models.Post(title="Second Heading", content="Lorem ipsum dolor", member_id=1),
+	models.Post(title="Third Heading", content="Lorem ipsum dolor sit.", member_id=2),
+	models.Post(title="Fourth Heading", content="Lorem ipsum dolor.", member_id=2),
+	models.Post(title="Fifth Heading", content="Lorem ipsum dolor", member_id=2),
+	models.Post(title="Sixth Heading", content="Lorem ipsum dolor.", member_id=2),
+	models.Post(title="Seventh Heading", content="Lorem ipsum dolor", member_id=1),
+	models.Post(title="eighth Heading", content="Lorem ipsum dolor", member_id=3),
+	models.Post(title="nineth Heading", content="Lorem ipsum dolor ", member_id=3),
+	models.Post(title="tenth Heading", content="Lorem ipsum dolor", member_id=3)
 ]
 
 def store(members_store, posts_store):
+	times = 0
+	"""
 	for member in members:
+		if times >= 3:
+			break
 		members_store.add(member)
-
-	for index, post in enumerate(posts):
-		post.date += models.datetime.timedelta(0,index)
+		times += 1
+			
+	for post in posts:
+		if times >= 3:
+			break
 		posts_store.add(post)
+		times += 1
+	"""
