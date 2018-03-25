@@ -134,9 +134,15 @@ class TopicApi(BaseTopic):
 			"content", type=str, required=True, nullable=False
 		)
 		args = parser.parse_args(strict=True)
+		title = args["title"]
+		content = args["content"]
+		if len(content) > 790:
+			return { "messg": "content exceed max len" }, 400
+		if len(title) > 35:
+			return { "message", "title exceed max len" }, 400
 		try:
-			post.title = args["title"]
-			post.content = args["content"]
+			post.title = title
+			post.content = content
 			posts_store.update(post)
 			result = {
 				"message":"topic updated successfully?!!",
