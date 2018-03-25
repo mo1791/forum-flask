@@ -27,7 +27,7 @@ jwt = JWTManager(app)
 
 @jwt.user_identity_loader
 def add_identity(user):
-	return str(user.id) + str(user.public_id)
+	return str(user.id) + str(user.p_id)
 
 @app.route("/auth", methods=["POST"])
 def auth():
@@ -45,12 +45,14 @@ def auth():
 	return jsonify({"access_token": token}), 201
 
 @app.route("/dev-token", methods=["POST"])
+@jwt_required
 def dev_token():
-	id_ = int(get_jwt_identity()[0])
+	current = get_jwt_identity()
+	id_ = int(current[0])
 	current_user = models.Member.query.get(id_)
 	expires = datetime.timedelta(days=365)
 	token = create_access_token(identity=current_user, expires_delta=expires)
-	return json({"log_access_token": token}), 201
+	return jsonify({"log_access_token": token}), 201
 
 
 @app.route("/create", methods=["POST"])
