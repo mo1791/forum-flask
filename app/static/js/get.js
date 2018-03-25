@@ -38,7 +38,7 @@ const Show = Vue.extend({
 						 <div class="card-body">
 						    <h2 class="card-title">{{ post.title }}</h2>
 						    <p class="card-text" style="font-size: 13px;">{{ post.content }}</p>
-						    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 10px;">Created at:{{ post.date }}</h6>
+						    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 10px;">Created at:{{ post.create_at }}</h6>
 						  </div>
 						</div>
 					</div>

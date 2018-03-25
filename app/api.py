@@ -29,6 +29,7 @@ jwt = JWTManager(app)
 def add_identity(user):
 	return str(user.id) + str(user.p_id)
 
+
 @app.route("/auth", methods=["POST"])
 def auth():
 	if not request.is_json:
@@ -44,6 +45,7 @@ def auth():
 	token = create_access_token(identity=current_user)
 	return jsonify({"access_token": token}), 201
 
+
 @app.route("/dev-token", methods=["POST"])
 @jwt_required
 def dev_token():
@@ -52,7 +54,7 @@ def dev_token():
 	current_user = models.Member.query.get(id_)
 	expires = datetime.timedelta(days=365)
 	token = create_access_token(identity=current_user, expires_delta=expires)
-	return jsonify({"log_access_token": token}), 201
+	return jsonify({"long_access_token": token}), 201
 
 
 @app.route("/create", methods=["POST"])
@@ -78,6 +80,7 @@ def new_user():
 	}), 200
 
 
+
 class BaseTopic(Resource):
 	def options(self):
 		return {"allow": "GET, PUT, POST"},200, \
@@ -86,6 +89,7 @@ class BaseTopic(Resource):
 			"Access-Control-Allow-Methods": "POST, PUT, GET",
 			"Access-Control-Allow-Headers": "content-type, X-JWT-Token, X-Requested-With"
 		}
+
 
 @api.resource("/topic")
 class TopicListApi(BaseTopic):
@@ -111,6 +115,7 @@ class TopicListApi(BaseTopic):
 			"message": "new topic was created successfully?!!",
 			"posted": post.as_dict()
 		}
+
 
 @api.resource("/topic/<int:id_>")
 class TopicApi(BaseTopic):
