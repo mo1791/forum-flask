@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 __dirname = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-app.config["SQLALCHEMY_DATABASE_URI"] = """sqlite:///{}""".format(os.path.join(__dirname, "forum.db"))
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
