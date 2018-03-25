@@ -25,7 +25,7 @@ class BaseStores(object):
 		return result
 	
 	def delete(self, id_):
-		result = self.data_provider.get(id_)
+		result = self.data_provider.query.get(id_)
 		db.session.delete(result)
 		db.session.commit()
 		return result

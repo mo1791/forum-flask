@@ -1,17 +1,3 @@
-const mixin = {
-	methods: {
-		getData: function() {
-			const form = document.querySelector("#form")
-			const data = new FormData(form)
-			const vals = Array.from(data.entities()).reduce((obj, [name, value]) => {
-				obj[name] = value
-				return obj
-			}, {})
-			return JSON.stringify(vals)
-		}
-	},
-}
-
 const Home = Vue.extend({
 	template: "<router-view></router-view>"
 })
@@ -27,9 +13,10 @@ const Index = Vue.extend({
 		fetchPosts() {
 			this.error = this.posts = null
 			this.loading = true
-			this.$http.get(`/api/v1/topic`).then(response => {
+			this.$http.get(`/api/v1/topic`, {headers: {"X-JWT-Token": `Forum ${token}`}})
+			.then(response => {
 				this.loading = false
-				console.log(response.body)
+				this.posts = response.body
 			}, error => {
 				console.log(`error :${error}`)
 			})
@@ -40,7 +27,36 @@ const Index = Vue.extend({
 	},
 	template: `
 		<div class="index">
-			hello world
+			<div v-if="loading" class="loading">
+				loading data ....
+			</div>
+			<div v-if="posts" class="table">
+				<table>
+					<tr>
+						<th>Topic</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>Show</th>
+					</tr>
+					<tr v-for="post in posts">
+						<td>
+							{{ post.title }}
+						</td>
+						<td>
+							<router-link :to="{name: 'edit', params: {id: post.id }}" class="btn btn-warning btn-sm">Edit</router-link>
+						</td>
+						<td>
+							<router-link :to="{name: 'delete', params: {id: post.id }}" class="btn btn-danger btn-sm">Delete</router-link>
+						</td>
+						<td>
+							<router-link :to="{name: 'show', params: {id: post.id }}" class="btn btn-primary btn-sm">Show</router-link>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div v-if="error" class="error">
+				Error ....
+			</div>
 		</div>
 	`
 })
