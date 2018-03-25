@@ -1,44 +1,32 @@
-"use strict";
-document.addEventListener('DOMContentLoaded', () => {
-	
-	const form = document.querySelector("#form");
-	const error = err => { throw Error(err) };
-
-	function handler(e) {
-		e.preventDefault();
-		const data = new FormData(this);
-		const values = Array.from(data.entries()).reduce((obj, [name,value]) => {
-			obj[name] = value;
-			return obj;
-		}, {});
-		const json = JSON.stringify(values);
-		
-		Promise.resolve(function() {
-			if (this.has("csrf_token") && this.get("title") != "" && this.get("content") != "") {
-				return true;
-			}
-			return false;
-		})
-		.then(response => {
-			return (response.call(data) && Request.post("/api/topic", {
-				data: json,
-				headers: [
-					["X-Requested-With", "XMLHttpRequest"],
-					["Content-Type", "application/json; charset=utf-8"]
-				]
-			})) || error("blank inputs")
-		})
-		.then(response => {
-			window.alert(response.message)
-			console.info(response.posted)
-			return Promise.resolve(window.confirm("want to create another?"))
-		}).then(response => {
-			return (!response && (window.location = window.location.origin)) || ( window.location = window.location.href)
-		})
-		.catch(error => {
-			window.alert(error.message)
-			console.error(error)
-		})
-	}
-	form.addEventListener("submit", handler.bind(form));
-}, false);
+const Add = Vue.extend({
+	mixins: [mixin],
+	methods: {
+		post_handler(e) {
+			const data = this.getData()
+			this.$http.post(`/api/v1/topic`, data, {headers: {"X-JWT-Token": `Forum ${token}`}})
+			.then(response => {
+				response.ok && window.alert(response.body.message)
+				this.$router.push({name: "index"})
+			}, error => {
+				console.log(`error: ${error}`)
+			})
+		}
+	},
+	template: `
+		<div class="add">
+			<form @submit.prevent="post_handler" method="post" id="form">
+				<div class="form-group">
+					<label for="title">Title :</label>
+					<input type="text" name="title" class="form-control" id="title">
+				</div>
+				<div class="form-group">
+					<label for="content">Content :</label>
+					<textarea name="content" class="form-control" rows="6" id="content"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Create Topic</button>
+				</div>
+			</form>
+		</div>
+	`
+})

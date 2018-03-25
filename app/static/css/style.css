@@ -4,6 +4,9 @@ body {
 	font-family: 'Oswald', sans-serif;
 	font-size: 18px;
 }
+.btn {
+	text-transform: none;
+}
 
 button {
 	-webkit-transition: all .45s linear;
@@ -99,17 +102,17 @@ td:nth-child(3) {
 }
 
 
-td:nth-child(3) button {
+td:nth-child(3) a {
 	background-color: #d81920;
 	padding: 7px 9px;
 	font-size: 15px;
 }
 
-td:nth-child(3) button:hover {
+td:nth-child(3) a:hover {
 	box-shadow: 0px 0px 0px 1px #d81920 inset,0px 0px 0px 3px #fff inset;
 }
 
-td:nth-child(3) button a {
+td:nth-child(3) a {
 	color: #fff;
 }
 
