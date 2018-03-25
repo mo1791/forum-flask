@@ -2,13 +2,11 @@ from flask import render_template
 from app import app, posts_store, members_store
 from app import models
 
-app.config["SECRET_KEY"] = "private_key"
 
 @app.route("/")
 @app.route("/index")
 def home():
 	return render_template("index.html")
-
 
 @app.errorhandler(404)
 def not_found(err):
