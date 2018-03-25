@@ -13,7 +13,6 @@ app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
 
-migrate = Migrate(app, db)
 
 from app import dummy_data, stores
 
