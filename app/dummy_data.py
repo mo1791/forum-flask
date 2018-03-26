@@ -28,10 +28,16 @@ def store(members_store, posts_store):
 		if times >= 3:
 			break
 		members_store.add(member)
+<<<<<<< HEAD
 		times += 1
 	"""		
 	for post in posts:
 		if times < 10:
+=======
+		times += 1	
+	for post in posts:
+		if times >= 10:
+>>>>>>> v1.4.3-db
 			break
 		posts_store.add(post)
 		times += 1
