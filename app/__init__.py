@@ -1,19 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 import os
 
 app = Flask(__name__)
 
-__dirname = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://pcswhxjwpdfali:e4371b669a020fd188ceec2d1b8382e37167308a09c0fcb36fb6bdfb9451c355@ec2-54-243-28-109.compute-1.amazonaws.com:5432/db807aat9jelok"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
-
-migrate = Migrate(app, db)
 
 from app import dummy_data, stores
 
