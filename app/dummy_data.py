@@ -29,10 +29,9 @@ def store(members_store, posts_store):
 			break
 		members_store.add(member)
 		times += 1
-			
+	"""		
 	for post in posts:
-		if times >= 3:
+		if times < 10:
 			break
 		posts_store.add(post)
 		times += 1
-	"""
