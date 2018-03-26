@@ -4,4 +4,5 @@ Flask-JWT-Extended==3.7.2
 Flask-Migrate==2.1.1
 Flask-RESTful==0.3.6
 Flask-SQLAlchemy==2.3.2
+Flask-Script==0.4.0
 psycopg2==2.7.4

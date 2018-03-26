@@ -1,6 +1,6 @@
 from app import models
 from app import db
-from sqlalchemy import func, desc
+from sqlalchemy import func
 
 
 class BaseStores(object):
