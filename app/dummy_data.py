@@ -20,24 +20,3 @@ posts = [
 	models.Post(title="nineth Heading", content="Lorem ipsum dolor ", member_id=3),
 	models.Post(title="tenth Heading", content="Lorem ipsum dolor", member_id=3)
 ]
-
-def store(members_store, posts_store):
-	times = 0
-	"""
-	for member in members:
-		if times >= 3:
-			break
-		members_store.add(member)
-<<<<<<< HEAD
-		times += 1
-	"""		
-	for post in posts:
-		if times < 10:
-=======
-		times += 1	
-	for post in posts:
-		if times >= 10:
->>>>>>> v1.4.3-db
-			break
-		posts_store.add(post)
-		times += 1
