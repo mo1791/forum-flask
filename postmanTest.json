@@ -15,11 +15,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
+					"raw": "https://flaskmo1971.herokuapp.com/api/v1/topic",
 					"protocol": "http",
-					"host": ["glacial-ravine-46753.herokuapp.com"],
+					"host": ["flaskmo1971.herokuapp.com"],
 					"path": [
 						"api",
+						"v1",
 						"topic"
 					]
 				}
@@ -33,11 +34,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"raw": "https://flaskmo1971.herokuapp.com/api/v1/topic/5",
 					"protocol": "http",
-					"host": ["glacial-ravine-46753.herokuapp.com"],
+					"host": ["flaskmo1971.herokuapp.com"],
 					"path": [
 						"api",
+						"v1",
 						"topic",
 						"5"
 					]
@@ -60,11 +62,12 @@
 					"raw": "{\n\t\"title\": \"hello\",\n\t\"content\": \"This is the topic content !\"\n}"
 				},
 				"url": {
-					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic",
+					"raw": "https://flaskmo1971.herokuapp.com/api/v1/topic",
 					"protocol": "http",
-					"host": ["glacial-ravine-46753.herokuapp.com"],
+					"host": ["flaskmo1971.herokuapp.com"],
 					"path": [
 						"api",
+						"v1",
 						"topic"
 					]
 				}
@@ -86,11 +89,12 @@
 					"raw": "{\n\t\"title\": \"hello\",\n\t\"content\": \"This is the topic content !\"\n}"
 				},
 				"url": {
-					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"raw": "https://flaskmo1971.herokuapp.com/api/v1/topic/5",
 					"protocol": "http",
-					"host": ["glacial-ravine-46753.herokuapp.com"],
+					"host": ["flaskmo1971.herokuapp.com"],
 					"path": [
 						"api",
+						"v1",
 						"topic",
 						"5"
 					]
@@ -105,11 +109,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "https://glacial-ravine-46753.herokuapp.com/api/topic/5",
+					"raw": "https://flaskmo1971.herokuapp.com/api/v1/topic/5",
 					"protocol": "http",
-					"host": ["glacial-ravine-46753.herokuapp.com/"],
+					"host": ["flaskmo1971.herokuapp.com/"],
 					"path": [
 						"api",
+						"v1",
 						"topic",
 						"5"
 					]

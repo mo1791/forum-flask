@@ -1,14 +1,5 @@
-from flask import request, jsonify
 from flask_restful import Resource, Api, abort, reqparse
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity, jwt_optional
-)
-from app import app, posts_store
-from app import models
-from app import db
-import datetime
-
+from app import app, posts_store, models, db
 
 
 api = Api(app, prefix="/api/v1")
@@ -22,63 +13,7 @@ app.config["JWT_HEADER_TYPE"] = "Forum"
 
 parser = reqparse.RequestParser(trim=True, bundle_errors=True)
 
-
-jwt = JWTManager(app)
-
-@jwt.user_identity_loader
-def add_identity(user):
-	return str(user.id) + str(user.p_id)
-
-
-@app.route("/auth", methods=["POST"])
-def auth():
-	if not request.is_json:
-		return jsonify({"messg": "missing json request"}), 400
-	parser.add_argument(
-		"user", type=str, required=True, nullable=False
-	)
-	args = parser.parse_args(strict=True)
-	username = args["user"]
-	current_user = models.Member.query.filter_by(user=username).first()
-	if not current_user:
-		return jsonify({"messg": " user not found"}), 404
-	token = create_access_token(identity=current_user)
-	return jsonify({"access_token": token}), 201
-
-
-@app.route("/dev-token", methods=["POST"])
-@jwt_required
-def dev_token():
-	current = get_jwt_identity()
-	id_ = int(current[0])
-	current_user = models.Member.query.get(id_)
-	expires = datetime.timedelta(days=365)
-	token = create_access_token(identity=current_user, expires_delta=expires)
-	return jsonify({"long_access_token": token}), 201
-
-
-@app.route("/create", methods=["POST"])
-def new_user():
-	if not request.is_json:
-		return jsonify({"messg": "missing json request"}), 400
-	parser.add_argument(
-		"user", type=str, required=True, nullable=False
-	)
-	parser.add_argument(
-		"name", type=str, required=True, nullable=False
-	)
-	parser.add_argument(
-		"age", type=int, required=True, nullable=False
-	)
-	args = parser.parse_args(strict=True)
-	new_user = models.Member(user=args["user"], name=args["name"], age=args["age"])
-	db.session.add(new_user)
-	db.session.commit()
-	return jsonify({
-		"messg": "new user has been created", 
-		"user": new_user.as_dict()
-	}), 200
-
+import api_auth
 
 
 class BaseTopic(Resource):
@@ -94,14 +29,14 @@ class BaseTopic(Resource):
 @api.resource("/topic")
 class TopicListApi(BaseTopic):
 	
-	@jwt_optional
+	@api_auth.jwt_optional
 	def get(self):
 		posts = [post.as_dict() for post in posts_store.get_all()]
 		return posts, {"Access-Control-Allow-Origin": "*"}
 	
-	@jwt_required
+	@api_auth.jwt_required
 	def post(self):
-		current_id = int(get_jwt_identity()[0])
+		current_id = int(api_auth.get_jwt_identity()[0])
 		parser.add_argument(
 			"title", type=str, required=True, nullable=False
 		)
@@ -120,7 +55,7 @@ class TopicListApi(BaseTopic):
 @api.resource("/topic/<int:id_>")
 class TopicApi(BaseTopic):
 	
-	@jwt_optional
+	@api_auth.jwt_optional
 	def get(self, id_):
 		post = posts_store.get_by_id(id_)
 		try:
@@ -129,7 +64,7 @@ class TopicApi(BaseTopic):
 			result = abort(404, message="topic %d doesn't exist" % id_)
 		return result
 	
-	@jwt_required
+	@api_auth.jwt_required
 	def put(self, id_):
 		post = posts_store.get_by_id(id_)
 		parser.add_argument(
@@ -157,7 +92,7 @@ class TopicApi(BaseTopic):
 			result = abort(404, message="topic %d doesn't exist" % id_)
 		return result
 	
-	@jwt_required
+	@api_auth.jwt_required
 	def delete(self, id_):
 		if not posts_store.entity_exist(id_):
 			abort(404, message="topic %d doesn't exist" % id_)
