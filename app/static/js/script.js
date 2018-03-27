@@ -10,6 +10,11 @@ const mixin = {
 				return obj
 			}, {})
 			return JSON.stringify(vals)
+		},
+		show(message, cls) {
+			const alert = document.querySelector(".alert")
+			alert.classList.contain("show") && alert.classList.remove("show")
+			alert.classList.add("show")
 		}
 	},
 }
