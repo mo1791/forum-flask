@@ -1,5 +1,5 @@
 Flask-Gunicorn==0.1.1
-Flask==0.12.2
+Flask>=1.0.0
 Flask-JWT-Extended==3.7.2
 Flask-Migrate==2.1.1
 Flask-RESTful==0.3.6
